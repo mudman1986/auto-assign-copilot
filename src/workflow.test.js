@@ -142,7 +142,7 @@ describe('Workflow executeWorkflow', () => {
 
     test('should return issue data in dry-run mode for refactor assignment', async () => {
       const mockGithub = createMockGithub({
-        graphql: async (query, variables) => {
+        graphql: async (query) => {
           // Match refactor issues query
           if (query.includes('refactor') && query.includes('orderBy')) {
             return {
@@ -203,7 +203,7 @@ describe('Workflow executeWorkflow', () => {
           }
           return {}
         },
-        request: async (endpoint, params) => {
+        request: async (endpoint) => {
           // Mock sub-issues endpoint - return empty for refactor issue
           if (endpoint.includes('sub_issues')) {
             return { data: [] }
@@ -244,7 +244,7 @@ describe('Workflow executeWorkflow', () => {
 
     test('should return mock issue data in dry-run mode when creating refactor issue', async () => {
       const mockGithub = createMockGithub({
-        graphql: async (query, variables) => {
+        graphql: async (query) => {
           if (query.includes('label(name: "refactor")')) {
             return {
               repository: {
@@ -354,7 +354,7 @@ describe('Workflow executeWorkflow', () => {
   describe('non-dry-run mode', () => {
     test('should make API changes in non-dry-run mode', async () => {
       const mockGithub = createMockGithub({
-        graphql: async (query, variables) => {
+        graphql: async (query) => {
           if (query.includes('addAssigneesToAssignable')) {
             return {
               addAssigneesToAssignable: {
@@ -450,7 +450,7 @@ describe('Workflow executeWorkflow', () => {
   describe('createRefactorIssue parameter', () => {
     test('should skip refactor issue creation when createRefactorIssue is false in refactor mode', async () => {
       const mockGithub = createMockGithub({
-        graphql: async (query, variables) => {
+        graphql: async (query) => {
           if (query.includes('suggestedActors')) {
             return {
               repository: {
@@ -516,7 +516,7 @@ describe('Workflow executeWorkflow', () => {
 
     test('should create refactor issue when createRefactorIssue is true in refactor mode', async () => {
       const mockGithub = createMockGithub({
-        graphql: async (query, variables) => {
+        graphql: async (query) => {
           if (query.includes('createIssue')) {
             return {
               createIssue: {
@@ -619,7 +619,7 @@ describe('Workflow executeWorkflow', () => {
 
     test('should skip refactor issue creation when createRefactorIssue is false in auto mode with no issues', async () => {
       const mockGithub = createMockGithub({
-        graphql: async (query, variables) => {
+        graphql: async (query) => {
           if (query.includes('suggestedActors')) {
             return {
               repository: {
@@ -694,7 +694,7 @@ describe('Workflow executeWorkflow', () => {
 
     test('should still assign existing refactor issues when createRefactorIssue is false', async () => {
       const mockGithub = createMockGithub({
-        graphql: async (query, variables) => {
+        graphql: async (query) => {
           if (query.includes('addAssigneesToAssignable')) {
             return {
               addAssigneesToAssignable: {
@@ -798,7 +798,7 @@ describe('Workflow executeWorkflow', () => {
   describe('wait functionality', () => {
     test('should wait when event is issues and waitSeconds is set', async () => {
       const mockGithub = createMockGithub({
-        graphql: async (query, variables) => {
+        graphql: async (query) => {
           // Mock the closed issues query for issue events
           if (query.includes('states: CLOSED')) {
             return {
@@ -877,7 +877,7 @@ describe('Workflow executeWorkflow', () => {
 
     test('should not wait when waitSeconds is 0', async () => {
       const mockGithub = createMockGithub({
-        graphql: async (query, variables) => {
+        graphql: async (query) => {
           // Mock the closed issues query for issue events
           if (query.includes('states: CLOSED')) {
             return {
@@ -1115,7 +1115,7 @@ describe('Workflow executeWorkflow', () => {
       }
 
       const mockGithub = createMockGithub({
-        graphql: async (query, variables) => {
+        graphql: async (query) => {
           // Mock recent closed issues for cooldown check
           if (query.includes('states: CLOSED') && query.includes('first: 20')) {
             return {
@@ -1391,7 +1391,7 @@ describe('Workflow executeWorkflow', () => {
   describe('required label security feature', () => {
     test('should skip issues without required label when requiredLabel is set', async () => {
       const mockGithub = createMockGithub({
-        graphql: async (query, variables) => {
+        graphql: async (query) => {
           if (query.includes('suggestedActors')) {
             return {
               repository: {
@@ -1507,7 +1507,7 @@ describe('Workflow executeWorkflow', () => {
 
     test('should apply required label to refactor issues', async () => {
       const mockGithub = createMockGithub({
-        graphql: async (query, variables) => {
+        graphql: async (query) => {
           if (query.includes('suggestedActors')) {
             return {
               repository: {
