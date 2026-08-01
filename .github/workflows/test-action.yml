@@ -73,7 +73,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: Test action with provided inputs
         id: test-action
@@ -93,24 +93,26 @@ jobs:
 
       - name: Display action outputs
         run: |
-          echo "## Action Test Results" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### Inputs Used:" >> $GITHUB_STEP_SUMMARY
-          echo "- **Mode**: ${{ inputs.mode || 'auto' }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Label Override**: ${{ inputs.label-override || '' }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Force**: ${{ inputs.force || false }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Dry Run**: ${{ inputs.dry-run || true }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Allow Parent Issues**: ${{ inputs.allow-parent-issues || false }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Skip Labels**: ${{ inputs.skip-labels || 'no-ai,refining' }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Refactor Threshold**: ${{ inputs.refactor-threshold || '4' }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Create Refactor Issue**: ${{ inputs.create-refactor-issue || true }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Refactor Issue Template**: ${{ inputs.refactor-issue-template || '(none - using default)' }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Wait Seconds**: ${{ inputs.wait-seconds || '0' }}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### Outputs:" >> $GITHUB_STEP_SUMMARY
-          echo "- **Assigned Issue Number**: ${{ steps.test-action.outputs.assigned-issue-number }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Assigned Issue URL**: ${{ steps.test-action.outputs.assigned-issue-url }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Assignment Mode**: ${{ steps.test-action.outputs.assignment-mode }}" >> $GITHUB_STEP_SUMMARY
+          {
+            echo "## Action Test Results"
+            echo ""
+            echo "### Inputs Used:"
+            echo "- **Mode**: ${{ inputs.mode || 'auto' }}"
+            echo "- **Label Override**: ${{ inputs.label-override || '' }}"
+            echo "- **Force**: ${{ inputs.force || false }}"
+            echo "- **Dry Run**: ${{ inputs.dry-run || true }}"
+            echo "- **Allow Parent Issues**: ${{ inputs.allow-parent-issues || false }}"
+            echo "- **Skip Labels**: ${{ inputs.skip-labels || 'no-ai,refining' }}"
+            echo "- **Refactor Threshold**: ${{ inputs.refactor-threshold || '4' }}"
+            echo "- **Create Refactor Issue**: ${{ inputs.create-refactor-issue || true }}"
+            echo "- **Refactor Issue Template**: ${{ inputs.refactor-issue-template || '(none - using default)' }}"
+            echo "- **Wait Seconds**: ${{ inputs.wait-seconds || '0' }}"
+            echo ""
+            echo "### Outputs:"
+            echo "- **Assigned Issue Number**: ${{ steps.test-action.outputs.assigned-issue-number }}"
+            echo "- **Assigned Issue URL**: ${{ steps.test-action.outputs.assigned-issue-url }}"
+            echo "- **Assignment Mode**: ${{ steps.test-action.outputs.assignment-mode }}"
+          } >> "$GITHUB_STEP_SUMMARY"
 
   test-all-input-combinations:
     name: Test All Input Combinations
@@ -214,7 +216,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: Test - ${{ matrix.test-name }}
         id: test
