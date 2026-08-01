@@ -35,10 +35,10 @@ jobs:
         id: check-changes
         run: |
           if [ -n "$(git status --porcelain dist/)" ]; then
-            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
             echo "Changes detected in dist/ directory"
           else
-            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
             echo "No changes in dist/ directory"
           fi
 
