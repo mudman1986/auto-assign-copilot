@@ -148,7 +148,7 @@ module.exports = async ({
    * Log and handle assignment (dry run or actual)
    * @param {Object} issue - Issue to assign
    * @param {string} type - Type of issue ('issue' or 'refactor issue')
-   * @returns {Promise<Object>} - Result object with issue
+   * @returns {Promise<{issue: Object, effectiveMode: string}>} - Result object with issue and effectiveMode
    */
   async function handleAssignment (issue, type = 'issue') {
     if (dryRun) {
