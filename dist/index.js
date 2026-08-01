@@ -677,7 +677,7 @@ module.exports = async ({
         }
       )
       return subIssuesResponse.data.length
-    } catch (error) {
+    } catch {
       return 0
     }
   }
