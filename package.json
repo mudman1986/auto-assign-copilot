@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@vercel/ncc": "^0.45.0",
-    "jest": "^30.4.2"
+    "jest": "^30.5.0"
   },
   "overrides": {
     "tar": "^7.5.4",
